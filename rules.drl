@@ -1,0 +1,32 @@
+import com.tu.drools.models.Server
+
+rule "VERIFICANDO PROCESADOR"
+  when
+  $server : Server( processors < 2 || processors > 6)
+  then
+  $server.setValid(false);
+  $server.setTxtResultado("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON EL PROCESADOR!");
+  System.out.println("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON EL PROCESADOR!");
+end
+
+
+rule "VERIFICANDO MEMORIA"
+  when
+  $server : Server( memory<=1024 || memory >= 4096)
+  then
+  $server.setValid(false);
+  $server.setTxtResultado("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON LA MEMORIA!");
+  System.out.println("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON LA MEMORIA!");
+end
+
+
+rule "VERIFICANDO DISCO"
+  when
+  $server : Server( diskspace <= 2048 || diskspace >= 20000)
+  then
+  $server.setValid(false);
+  $server.setTxtResultado("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON EL DISCO!");
+  System.out.println("SERVIDOR CON NOMBRE:  "+ $server.getName() + " NO CUMPLE CON EL DISCO!");
+end
+
+
