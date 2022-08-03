@@ -1,0 +1,52 @@
+import com.tu.demo.models.AgregadoModel
+
+rule "Verificando caracteristicaEdad"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("caracteristicaEdad") < 18 || caracteristicas.get("caracteristicaEdad") > 65 )
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("100");
+end
+
+rule "Verificando contarObligaciones"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("contarObligaciones") == 1 )  // hay 2
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("200");
+end
+
+
+rule "Verificando contarObligacionesVigentes"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("contarObligacionesVigentes") != 1 ) //hay 1
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("300");
+end
+
+rule "Verificando sumatoriaCreditos"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("sumatoriaCreditos") > 30000 )
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("400");
+end
+
+rule "Verificando Aprobado"
+  no-loop true
+  agenda-group "grupo3"
+  when
+  $agregado : AgregadoModel( )
+  then
+  $agregado.setResultado("APROBADO");  
+  $agregado.setRazones("");
+end

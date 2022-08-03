@@ -1,0 +1,87 @@
+package AgregadoRuleFlow_muchasreglas
+
+
+
+import com.tu.demo.models.AgregadoModel
+
+
+rule "Verificando extra1"
+  no-loop true
+
+  agenda-group "extraG1"
+  when
+  $agregado : AgregadoModel( resultado == "APROBADO" && caracteristicas.get("edad") >= 40 )
+  then
+  $agregado.extras.put("extra1", "No se recomienda dar el credito");
+  
+end
+
+rule "Verificando extra2"
+  no-loop true
+
+  agenda-group "extraG1"
+  when
+  $agregado : AgregadoModel( resultado == "APROBADO" && caracteristicas.get("edad") < 40 )
+  then
+  $agregado.extras.put("extra2", "Ofrezca un 12% mas de credito");
+  
+end
+
+rule "Verificando extrasss"
+  no-loop true
+
+  agenda-group "extraG1"
+  when
+  $agregado : AgregadoModel( resultado == "APROBADO" && caracteristicas.get("c2") > 0 )
+  then
+  $agregado.extras.put("extrassss", "El c2 es mayor a 0, es buen indicador");
+  
+end
+
+
+rule "Verificando extra3"
+  no-loop true
+
+  agenda-group "extraG2"
+  when
+  $agregado : AgregadoModel( resultado == "CONDICIONADO" && razones contains "700" )
+  then
+  $agregado.extras.put("extra3", "Es el condicionado por la 700");
+  
+end
+
+
+
+
+rule "Verificando extra4"
+  no-loop true
+
+  agenda-group "extraG3"
+  when
+  $agregado : AgregadoModel( resultado == "PR3" && razones contains "456" )
+  then
+  $agregado.extras.put("extra4", "Es el PR3 por la 456");
+  
+end
+
+rule "Verificando extra5"
+  no-loop true
+
+  agenda-group "extraG3"
+  when
+  $agregado : AgregadoModel( resultado == "PR3" && razones contains "123" )
+  then
+  $agregado.extras.put("extra5", "Es el PR3 por la 123");
+  
+end
+
+rule "Verificando extra6"
+  no-loop true
+
+  agenda-group "extraG3"
+  when
+  $agregado : AgregadoModel( resultado == "PR3" && razones contains "789" )
+  then
+  $agregado.extras.put("extra6", "Es el PR3 por la 789");
+  
+end

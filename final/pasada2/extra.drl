@@ -1,0 +1,42 @@
+package AgregadoRuleFlow;
+
+import com.tu.demo.models.AgregadoModel
+
+
+rule "Verificando: e1"
+  no-loop true
+
+  agenda-group "extraG1"
+  when
+  $agregado : AgregadoModel( resultado == "APROBADO" && caracteristicas.get("edad") <= 40 )
+  then
+  $agregado.extras.put("extraG1", "Doble de credito");
+  System.out.println("Esta es despues de pasar por las caracteristicas");
+  
+end
+
+
+rule "Verificando: e2"
+  no-loop true
+
+  agenda-group "extraG1"
+  when
+  $agregado : AgregadoModel( resultado == "APROBADO" && caracteristicas.get("edad") > 40 )
+  then
+  $agregado.extras.put("extraG2", "No se recomienda el credito");
+  System.out.println("No se recomienda el credito");
+  
+end
+
+rule "Verificando: e3"
+  no-loop true
+
+  agenda-group "extraG2"
+  when
+  $agregado : AgregadoModel( resultado == "RECHAZADO" && razones.split("-") contains "200" )
+  then
+  $agregado.extras.put("msgRazon", "Esta rechazado por la 200");
+  System.out.println("Jugando con las razones");
+  
+end
+

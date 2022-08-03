@@ -1,0 +1,141 @@
+package AgregadoRuleFlow_muchasreglas
+
+import com.tu.demo.models.AgregadoModel
+
+// ******************** ESTE ES EL GRUPO 1 ********************
+
+rule "Verificando edad"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("edad") < 18 || caracteristicas.get("edad") > 65)
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("100");
+end
+
+rule "Verificando c2"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("c2") == 20 )
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("200");
+end
+
+rule "Verificando c3"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("c3") == 30 )
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("300");
+end
+
+rule "Verificando c4"
+  no-loop true
+  agenda-group "grupo1"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("c4") == 40 )
+  then
+  $agregado.setResultado("RECHAZADO");  
+  $agregado.setRazones("400");
+end
+
+
+// ******************** ESTE ES EL GRUPO 2 ********************
+
+rule "Verificando g1"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("g1") == 10)
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("500");
+end
+
+rule "Verificando g2"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("g2") == 20 )
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("600");
+end
+
+rule "Verificando g3"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("g3") == 30 )
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("700");
+end
+
+rule "Verificando g4"
+  no-loop true
+  agenda-group "grupo2"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("g4") == 40 )
+  then
+  $agregado.setResultado("CONDICIONADO");  
+  $agregado.setRazones("800");
+end
+
+
+
+
+
+
+
+
+// ******************** ESTE ES EL GRUPO 3 ********************
+
+rule "Verificando k1"
+  no-loop true
+  agenda-group "grupo3"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("k1") == 10)
+  then
+  $agregado.setResultado("PR3");  
+  $agregado.setRazones("123");
+end
+
+rule "Verificando k2"
+  no-loop true
+  agenda-group "grupo3"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("k2") == 20 )
+  then
+  $agregado.setResultado("PR3");  
+  $agregado.setRazones("456");
+end
+
+rule "Verificando k3"
+  no-loop true
+  agenda-group "grupo3"
+  when
+  $agregado : AgregadoModel( caracteristicas.get("k3") == 30 )
+  then
+  $agregado.setResultado("PR3");  
+  $agregado.setRazones("789");
+end
+
+
+
+
+
+rule "Aprobando"
+  no-loop true
+  agenda-group "grupo4"
+  when
+  $agregado : AgregadoModel( )
+  then
+  $agregado.setResultado("APROBADO");  
+  $agregado.setRazones("");
+end
